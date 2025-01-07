@@ -143,8 +143,8 @@ public class Network {
     public String toString() {
        String all="Network: ";
         for(int i = 0; i < this.users.length; i++){
-            all += "\n";
             if (this.users[i] != null) {
+                all += "\n";
                 String ans = this.users[i].getName() + " -> ";
                 for (int j = 0; j < this.users[i].getfCount(); j++) {
                     ans = ans + this.users[i].getfFollows()[j] + " ";
