@@ -93,12 +93,12 @@ public class Network {
         }
         int max =0;
         for( int i = 0; i < this.users.length; i++){
-            if(this.users[i]!= null && getUser(name).countMutual(this.users[i]) > max){
+            if(this.users[i]!= null && !this.users[i].equals(getUser(name)) && getUser(name).countMutual(this.users[i]) > max){
                 max = getUser(name).countMutual(this.users[i]);
             }
         }
         for( int i = 0; i < this.users.length; i++){
-            if(this.users[i]!= null && getUser(name).countMutual(this.users[i]) == max){
+            if(this.users[i]!= null && !this.users[i].equals(getUser(name)) && getUser(name).countMutual(this.users[i]) == max){
                return this.users[i].getName();
             }
         }
@@ -110,12 +110,12 @@ public class Network {
     public String mostPopularUser() {
         int max = 0;
         for(int i = 0; i < this.users.length; i++){
-            if (this.users[i] != null && this.users[i].getfCount() > max ) {
-                max = this.users[i].getfCount();
+            if (this.users[i] != null && this.followeeCount(this.users[i].getName()) > max ) {
+                max = this.followeeCount(this.users[i].getName());
             }
         }
         for(int i = 0; i < this.users.length; i++){
-            if (this.users[i] != null && this.users[i].getfCount() == max ) {
+            if (this.users[i] != null && this.followeeCount(this.users[i].getName()) == max ) {
                 return this.users[i].getName();
             }
         }
@@ -135,11 +135,14 @@ public class Network {
     public String toString() {
        String all=null;
         for(int i = 0; i < this.users.length; i++){
-        String ans = this.users[i].getName() + " -> ";
-        for (int j = 0; j < this.users[i].getfCount(); j++) {
-            ans = ans + this.users[i].getfFollows()[j] + " ";
+            if (this.users[i] != null) {
+                String ans = this.users[i].getName() + " -> ";
+                for (int j = 0; j < this.users[i].getfCount(); j++) {
+                    ans = ans + this.users[i].getfFollows()[j] + " ";
+            }
+            all += ans;
         }
-        all += ans;
+       
        }
       return all;
     }
