@@ -1,3 +1,5 @@
+
+
 /** Represents a social network. The network has users, who follow other uesrs.
  *  Each user is an instance of the User class. */
 public class Network {
@@ -30,7 +32,7 @@ public class Network {
      *  Notice that the method receives a String, and returns a User object. */
     public User getUser(String name) {
         for(int i=0; i< this.users.length; i++){
-            if(this.users[i] != null && this.users[i].getName() != null && this.users[i].getName().equals(name)){
+            if(this.users[i] != null && this.users[i].getName() != null && this.users[i].getName().toLowerCase().equals(name.toLowerCase())){
                 return this.users[i];
             }
         }
@@ -69,6 +71,9 @@ public class Network {
        if (name1 == null && name2 == null) {
         return false;
     }
+    if (name1 == name2) {
+        return false;
+    }
     if (this.getUser(name1) == null || this.getUser(name2) == null) {
         return false;
         
@@ -86,16 +91,17 @@ public class Network {
         if (name == null) {
             return null;
         }
-        int max = 0;
-        for(int i = 0; i < this.users.length; i++){
-            if (this.users[i] != null && this.users[i].countMutual(this.getUser(name))<=max) {
-                max = this.users[i].countMutual(this.getUser(name));
-            } 
+        int max =0;
+        for( int i = 0; i < this.users.length; i++){
+            if(getUser(name).countMutual(this.users[i]) > max){
+                max = getUser(name).countMutual(this.users[i]);
+            }
         }
-        for(int i = 0; i < this.users.length; i++){
-            if (this.users[i].countMutual(this.getUser(name)) == max) {
-                return this.users[i].getName();
-            }}
+        for( int i = 0; i < this.users.length; i++){
+            if(getUser(name).countMutual(this.users[i]) == max){
+               return this.users[i].getName();
+            }
+        }
         return null;
     }
 
