@@ -93,12 +93,12 @@ public class Network {
         }
         int max =0;
         for( int i = 0; i < this.users.length; i++){
-            if(getUser(name).countMutual(this.users[i]) > max){
+            if(this.users[i]!= null && getUser(name).countMutual(this.users[i]) > max){
                 max = getUser(name).countMutual(this.users[i]);
             }
         }
         for( int i = 0; i < this.users.length; i++){
-            if(getUser(name).countMutual(this.users[i]) == max){
+            if(this.users[i]!= null && getUser(name).countMutual(this.users[i]) == max){
                return this.users[i].getName();
             }
         }
@@ -108,7 +108,17 @@ public class Network {
     /** Computes and returns the name of the most popular user in this network: 
      *  The user who appears the most in the follow lists of all the users. */
     public String mostPopularUser() {
-        //// Replace the following statement with your code
+        int max = 0;
+        for(int i = 0; i < this.users.length; i++){
+            if (this.users[i] != null && this.users[i].getfCount() > max ) {
+                max = this.users[i].getfCount();
+            }
+        }
+        for(int i = 0; i < this.users.length; i++){
+            if (this.users[i] != null && this.users[i].getfCount() == max ) {
+                return this.users[i].getName();
+            }
+        }
         return null;
     }
 
