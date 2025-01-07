@@ -92,12 +92,7 @@
         for(int i=0; i< this.follows.length; i++){
             if ((this.follows(this.follows[i])) && (other.follows(other.follows[i]))) {
                     counter ++;
-            }
-            if ((this.follows(this.follows[i])) && (!other.follows(other.follows[i]))) {
-                counter ++;
-            }
-            if ((!this.follows(this.follows[i])) && (other.follows(other.follows[i]))) {
-                counter ++;
+           
         }}
         return counter;
     }
