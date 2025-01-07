@@ -125,22 +125,31 @@ public class Network {
     /** Returns the number of times that the given name appears in the follows lists of all
      *  the users in this network. Note: A name can appear 0 or 1 times in each list. */
     private int followeeCount(String name) {
+        int counter = 0;
         if (getUser(name)  == null) {
             return 0;
         }
-        return 1;
+        for(int i = 0 ;i < this.users.length; i++){
+            if (this.users[i] != null && this.users[i].follows(name)) {
+                counter++;
+            }
+
+        }
+       
+        return counter;
     }
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-       String all="Network: \n";
+       String all="Network: ";
         for(int i = 0; i < this.users.length; i++){
+            all += "\n";
             if (this.users[i] != null) {
                 String ans = this.users[i].getName() + " -> ";
                 for (int j = 0; j < this.users[i].getfCount(); j++) {
                     ans = ans + this.users[i].getfFollows()[j] + " ";
             }
-            all += ans+ "\n";
+            all += ans ;
         }
        
        }
