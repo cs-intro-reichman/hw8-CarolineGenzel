@@ -89,11 +89,11 @@
     /*  Notice: This is the size of the intersection of the two follows lists. */
     public int countMutual(User other) {
        int counter = 0;
-        for(int i=0; i< this.follows.length; i++){
-            if ((this.follows(this.follows[i])) && (other.follows(other.follows[i]))) {
-                    counter ++;
-           
-        }}
+       for(int i = 0; i < this.follows.length; i++) {
+        if(this.follows[i] != null && other.follows(this.follows[i])) {
+            counter++;
+        }  
+        }
         return counter;
     }
 
