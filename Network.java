@@ -109,17 +109,17 @@ public class Network {
      *  The user who appears the most in the follow lists of all the users. */
     public String mostPopularUser() {
         int max = 0;
-        for(int i = 0; i < this.users.length; i++){
-            if (this.users[i] != null && this.followeeCount(this.users[i].getName()) > max ) {
-                max = this.followeeCount(this.users[i].getName());
+        String mostPopular = null;
+        for (int i = 0; i < this.users.length; i++) {
+            if (this.users[i] != null) {
+                int count = followeeCount(this.users[i].getName());
+                if (count > max) {
+                    max = count;
+                    mostPopular = this.users[i].getName();
+                }
             }
         }
-        for(int i = 0; i < this.users.length; i++){
-            if (this.users[i] != null && this.followeeCount(this.users[i].getName()) == max ) {
-                return this.users[i].getName();
-            }
-        }
-        return null;
+        return mostPopular;
     }
 
     /** Returns the number of times that the given name appears in the follows lists of all
@@ -133,14 +133,14 @@ public class Network {
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-       String all=null;
+       String all="Network: \n";
         for(int i = 0; i < this.users.length; i++){
             if (this.users[i] != null) {
                 String ans = this.users[i].getName() + " -> ";
                 for (int j = 0; j < this.users[i].getfCount(); j++) {
                     ans = ans + this.users[i].getfFollows()[j] + " ";
             }
-            all += ans;
+            all += ans+ "\n";
         }
        
        }
